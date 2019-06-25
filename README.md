@@ -39,7 +39,6 @@ Class | Method | HTTP request | Description
  - [Device](docs/Device.md)
  - [DeviceNotifications](docs/DeviceNotifications.md)
  - [DeviceNotificationsNotificationGroups](docs/DeviceNotificationsNotificationGroups.md)
- - [InlineResponse200](docs/InlineResponse200.md)
  - [Platform](docs/Platform.md)
  - [PlatformPackages](docs/PlatformPackages.md)
  - [Result](docs/Result.md)
