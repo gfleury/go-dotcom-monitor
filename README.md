@@ -47,10 +47,10 @@ Class | Method | HTTP request | Description
  - [TaskGetParams](docs/TaskGetParams.md)
 
 
-## Documentation For Authorization
+## Documentation For Authentication
 
-## api_key
-- **Type**: API key 
+## Authentication
+- **Type**: User/Password
 
 Example
 ```golang
