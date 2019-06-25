@@ -1,0 +1,554 @@
+swagger: "2.0"
+info:
+  description: "dotcom-monitor API"
+  version: "1.0.0"
+  title: "dotcom-monitor"
+host: "api.dotcom-monitor.com"
+basePath: "/config_api_v1"
+schemes:
+- "https"
+paths:
+  /platforms:
+    get:
+      tags:
+      - "platforms"
+      summary: "Return list of available platforms"
+      description: "Return list of available platforms."
+      operationId: "getPlataforms"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Platform"
+      security:
+      - api_key: []
+  /devices/{platform}:
+    get:
+      tags:
+      - "device"
+      summary: "Get device list by platform."
+      description: "Get device list by platform."
+      operationId: "getDevicesPlataform"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: platform
+          in: path
+          description: Platform name
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              type: integer
+      security:
+      - api_key: []
+  /device/{device_id}:
+    get:
+      tags:
+      - "device"
+      summary: "Get Device info."
+      description: "Get Device info."
+      operationId: "getDevice"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device_id
+          in: path
+          description: device id
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/Device"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "device"
+      summary: "Edit device list by platform."
+      description: "Edit device list by platform."
+      operationId: "editDevice"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device_id
+          in: path
+          description: Device id
+          type: string
+          required: true
+        - name: device
+          in: body
+          description: Device Object
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "device"
+      summary: "Get Device info."
+      description: "Get Device info."
+      operationId: "deleteDevice"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device_id
+          in: path
+          description: device id
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []
+  /devices:
+    put:
+      tags:
+      - "device"
+      summary: "Get device list by platform."
+      description: "Get device list by platform."
+      operationId: "addDevice"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device
+          in: body
+          description: Device Object
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []
+  /device/{device_id}/DisableAlert/:
+    post:
+      tags:
+      - "device"
+      summary: "Get Device info."
+      description: "Get Device info."
+      operationId: "disableDeviceAlert"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device_id
+          in: path
+          description: device id
+          type: string
+          required: true
+        - name: Alert Silence period
+          in: body
+          schema:
+            type: object
+            properties:
+              Alert_Silence_min:
+                type: integer
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            properties:
+              Success:
+                type: boolean
+              Result:
+                type: string
+      security:
+      - api_key: []
+  /device/{device_id}/tasks:
+   get:
+      tags:
+      - "device"
+      - "task"
+      summary: "Get Device tasks."
+      description: "Get Device tasks."
+      operationId: "getTasks"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device_id
+          in: path
+          description: device id
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              type: integer
+      security:
+      - api_key: []
+  /tasks:
+    put:
+      tags:
+      - "task"
+      summary: "Create new task."
+      description: "Create new task."
+      operationId: "addTask"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: device
+          in: body
+          description: Task Object
+          required: true
+          schema:
+            $ref: "#/definitions/Task"
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []      
+  /task/{task_id}:
+    get:
+      tags:
+      - "task"
+      summary: "Get Task info."
+      description: "Get Task info."
+      operationId: "getTask"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: task_id
+          in: path
+          description: task id
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Task"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "task"
+      summary: "Edit task."
+      description: "Edit task."
+      operationId: "editTask"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: task_id
+          in: path
+          description: Task id
+          type: string
+          required: true
+        - name: task
+          in: body
+          description: Task Object
+          required: true
+          schema:
+            $ref: "#/definitions/Task"
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "task"
+      summary: "Delete Task info."
+      description: "Delete Task info."
+      operationId: "deleteTask"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: task_id
+          in: path
+          description: task id
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Result'
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Result:
+    type: object
+    properties:
+      Success:
+        type: boolean
+      Result:
+        type: integer
+  Task:
+    type: object
+    properties:
+      RequestType:
+        type: string
+      Url:
+        type: string
+      Keyword1:
+        type: string
+      FullPageDownload:
+        type: boolean
+      Download_Html:
+        type: boolean
+      Download_Frames:
+        type: boolean
+      Download_StyleSheets:
+        type: boolean
+      GetParams:
+        type: array
+        items:
+          type: object
+          properties:
+            Name:
+              type: string
+            Value:
+              type: string
+      PostParams:
+        type: array
+        items:
+          type: object
+          properties:
+            Name:
+              type: string
+            Value:
+              type: string
+      HeaderParams:
+        type: array
+        items:
+          type: object
+          properties:
+            Name:
+              type: string
+            Value:
+              type: string
+      PrepareScript:
+        type: string
+      Device_Id:
+        type: integer
+      Task_Type_Id:
+        type: integer
+      Name:
+        type: string
+      Timeout:
+            type: integer
+  Device:
+    type: object
+    properties:
+      Avoid_Simultaneous_Checks:
+        type: boolean
+      Alert_Silence_Min:
+        type: integer
+      False_Positive_Check:
+        type: boolean
+      Locations:
+        type: array
+        items:
+          type: integer
+      Send_Uptime_Alert:
+        type: boolean
+      Status_Description:
+        type: string
+      Postpone:
+        type: boolean
+      Owner_Device_Id:
+        type: integer
+      Frequency:
+        type: integer
+      Filter_Id:
+        type: integer
+      Scheduler_Id:
+        type: integer
+      Number_Of_Tasks:
+        type: integer
+      Id:
+        type: integer
+      Platform_Id:
+        type: integer
+      Package_Id:
+        type: integer
+      Name:
+        type: string
+      Notifications:
+        type: object
+        properties:
+          E_Mail_Flag:
+            type: boolean
+          E_Mail_Address:
+            type: string
+          E_Mail_TimeInterval_Min:
+            type: integer
+          WL_Device_Flag:
+            type: boolean
+          WL_Device_Email_Address:
+            type: boolean
+          WL_Device_TimeInterval_Min:
+            type: integer
+          Pager_Flag:
+            type: boolean
+          Pager_Area_Code:
+            type: string
+          Pager_Phone:
+            type: string
+          Pager_Num_Code:
+            type: string
+          Pager_TimeInterval_Min:
+            type: integer
+          Phone_Flag:
+            type: boolean
+          Phone_Area_Code:
+            type: string
+          Phone_Phone:
+            type: string
+          Phone_TimeInterval_Min:
+            type: integer
+          SMS_Flag:
+            type: boolean
+          SMS_Phone:
+            type: string
+          SMS_TimeInterval_Min:
+            type: integer
+          Script_Flag:
+            type: boolean
+          Script_Batch_File_Name:
+            type: string
+          Script_TimeInterval_Min:
+            type: integer
+          SNMP_TimeInterval_Min:
+            type: integer
+          Notification_Groups:  
+            type: array
+            items:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Time_Shift_Min:
+                  type: integer
+  Platform:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+      Name:
+        type: "string"
+      Available:
+        type: boolean
+      Packages:
+        type: array
+        items:
+          type: object
+          properties:
+            Package_Id:
+              type: integer
+            Package_Name:
+              type: string
+            Platform_Id:
+              type: integer
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
