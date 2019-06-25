@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/antihax/optional"
+  packages = ["."]
+  revision = "ca021399b1a6796ecb758292c6311ce0b28857fc"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
   revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
@@ -42,6 +48,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1ff354e6469cb06a288de7cd58d40e7a5454ed3d2e3ddbb9b9c9c62066801dd7"
+  inputs-digest = "ebe85b7666268b07e46af0938d1d4d1d4ed37e193bdbc27a7da49f7371d14db0"
   solver-name = "gps-cdcl"
   solver-version = 1
