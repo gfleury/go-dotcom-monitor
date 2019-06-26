@@ -16,7 +16,7 @@ type Device struct {
 	Locations               []int32              `json:"Locations,omitempty"`
 	SendUptimeAlert         bool                 `json:"Send_Uptime_Alert,omitempty"`
 	StatusDescription       string               `json:"Status_Description,omitempty"`
-	Postpone                bool                 `json:"Postpone,omitempty"`
+	Postpone                bool                 `json:"Postpone"`
 	OwnerDeviceId           int32                `json:"Owner_Device_Id,omitempty"`
 	Frequency               int32                `json:"Frequency,omitempty"`
 	FilterId                int32                `json:"Filter_Id,omitempty"`
