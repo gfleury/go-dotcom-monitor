@@ -52,6 +52,8 @@ type APIClient struct {
 	TaskApi *TaskApiService
 
 	LoginApi *LoginApiService
+
+	LocationApi *LocationApiService
 }
 
 type service struct {
@@ -74,6 +76,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PlatformsApi = (*PlatformsApiService)(&c.common)
 	c.TaskApi = (*TaskApiService)(&c.common)
 	c.LoginApi = (*LoginApiService)(&c.common)
+	c.LocationApi = (*LocationApiService)(&c.common)
 
 	return c
 }

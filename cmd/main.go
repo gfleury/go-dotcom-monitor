@@ -36,6 +36,13 @@ func main() {
 
 	for _, platform := range platforms {
 		if platform.Available {
+			fmt.Println("Showing available locations for platform: ")
+			locations, _, err := client.LocationApi.GetLocations(ctx, platform.Name)
+			if err != nil {
+				fmt.Printf("%s\n", err.Error())
+			}
+			fmt.Println(locations)
+
 			fmt.Printf("Showing devices for platform, %v\n", platform.Name)
 			devices, _, err := client.DeviceApi.GetDevicesPlataform(ctx, strings.ToLower(platform.Name))
 			if err != nil {

@@ -369,6 +369,37 @@ paths:
             $ref: '#/definitions/Result'
       security:
       - api_key: []
+  /locations/{platform_name}:
+    get:
+      tags:
+      - "location"
+      summary: "Get location list by platform."
+      description: "Get location list by platform."
+      operationId: "getLocations"
+      produces:
+      - "application/json"
+      consumes:
+      - application/json
+      parameters:
+        - name: platform_name
+          in: path
+          description: Platform name
+          type: string
+          required: true
+      responses:
+        500:
+          description: "internal Error"
+        400:
+          description: "validation exception"
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Location'
+      security:
+      - api_key: []
+
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -549,6 +580,11 @@ definitions:
               type: string
             Platform_Id:
               type: integer
+  Location:
+    type: object
+    properties:
+      Id:
+        type: "integer"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
